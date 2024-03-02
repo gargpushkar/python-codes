@@ -60,8 +60,7 @@ i = 0
 j = N-1
 while i <= j:
     min_cost += candies[i]
-    for _ in range(K):
-        j-=1
+    j-=K
     i+=1
 print(min_cost)
 
@@ -70,7 +69,6 @@ i = 0
 j = N-1
 while i <= j:
     max_cost += candies[j]
-    for _ in range(K):
-        i+=1
+    i+=K
     j-=1
 print(max_cost)
