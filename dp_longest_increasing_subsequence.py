@@ -56,21 +56,6 @@ def solve_memo(arr, n, curr, prev, t):
 print(solve_memo(A, n, 0, -1, t))
 
 
-# Binary Search
-# https://www.youtube.com/watch?v=MYHajVcnXSA
-
-def lower_bound(A, n, elem):
-    l = 0
-    r = n-1
-    while l <= r:
-        mid = l + (r-l)//2
-        if elem <= A[mid]:
-            r = mid - 1
-        else:
-            l = mid + 1
-    return r
-
-
 
 def solve_tab(arr, n):
     t = [1 for i in range(n)]
@@ -83,6 +68,21 @@ def solve_tab(arr, n):
 print(solve_tab(A, n))
 
 
+
+# Binary Search
+# https://www.youtube.com/watch?v=MYHajVcnXSA
+
+def lower_bound(A, n, elem):
+    l = 0
+    r = n-1
+    while l < r:
+        mid = l + (r-l)//2
+        if elem <= A[mid]:
+            r = mid
+        else:
+            l = mid + 1
+    return r
+
 def solve_binary(arr, n):
     ans = [arr[0]]
     for i in range(1, n):
@@ -90,8 +90,8 @@ def solve_binary(arr, n):
             ans.append(arr[i])
         else:
             # Binary Search
-            # mid = lower_bound(ans, len(ans), arr[i])
-            mid = bisect.bisect_left(ans, arr[i])
+            mid = lower_bound(ans, len(ans), arr[i])
+            # mid = bisect.bisect_left(ans, arr[i])
             # l = 0
             # r = len(ans) - 1
             # while l<=r:
