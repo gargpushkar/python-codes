@@ -31,26 +31,33 @@
 
 # version 2 < version 1.
 
-version_1 = "2.3.000"
-version_2 = "2.3"
-i = 0 
-j = 0
-n = len(version_1)
-m = len(version_2)
-while i < n and j < m:
-    if version_1[i] > version_2[j]:
-        print(1)
-    elif version_1[i] < version_2[j]:
-        print(-1)
-    i+=1
-    j+=1
-    
-# version_1 = "".join(list(map(str, list(map(int, version_1.split("."))))))
-# version_2 = "".join(list(map(str, list(map(int, version_2.split("."))))))
+class Solution:
+	def compareVersion(self, version1: str, version2: str) -> int:
+		# add your logic here
+		# version_1 = list(map(int, version1.split(".")))
+		version1 = version1.split(".")
+		version_1 = []
+		for i in version1:
+			if i:
+				version_1.append(int(i))
+		# version_2 = list(map(int, version2.split(".")))
+		version2 = version2.split(".")
+		version_2 = []
+		for i in version2:
+			if i:
+				version_2.append(int(i))
+		n1 = len(version_1)
+		n2 = len(version_2)
+		if n1>n2:
+			for i in range(n2, n1):
+				version_2.append(0)
+		else:
+			for i in range(n1, n2):
+				version_1.append(0)
+		for i in range(len(version_1)):
+			if version_1[i] > version_2[i]:
+				return 1
+			elif version_1[i] < version_2[i]:
+				return -1
+		return 0
 
-# if version_1 == version_2:
-#     print(0)
-# elif version_1 > version_2:
-#     print(1)
-# else:
-#     print(-1)
