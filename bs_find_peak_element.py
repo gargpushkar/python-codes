@@ -44,3 +44,7 @@ class Solution:
                     else:
                         return mid-1
 
+
+nums = [1, 15, 25, 45, 42, 21, 17, 12, 11]
+sol = Solution()
+print(nums[sol.findPeakElement(nums)])
