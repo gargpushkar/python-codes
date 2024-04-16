@@ -71,6 +71,25 @@ def permute_back(input_array, starting_index, output_array):
 #             a[l], a[i] = a[i], a[l]  # backtrack 
   
 # permute2(list(arr), 0, len(arr))
+# output_array = []
+# permute_back([1, 2, 3, 4], 0, output_array)
+# print(output_array)
+
+
+
+def permute_backtracking_unique(input_array, starting_index, output_array):
+    if starting_index == len(input_array):
+        output_array.append(input_array[::])
+        return
+    
+    s = set()
+    for i in range(starting_index, len(input_array)):
+        if input_array[i] not in s:
+            s.add(input_array[i])
+            input_array[starting_index], input_array[i] = input_array[i], input_array[starting_index]
+            permute_backtracking_unique(input_array, starting_index+1, output_array)
+            input_array[starting_index], input_array[i] = input_array[i], input_array[starting_index]
+
 output_array = []
-permute_back([1, 2, 3, 4], 0, output_array)
+permute_backtracking_unique([1, 1, 2], 0, output_array)
 print(output_array)
