@@ -28,8 +28,8 @@ from typing import List
 # target = 3
 # nums = [1]
 # target = 1
-nums = [1,3]
-target = 3
+nums = [1,0,1,1,1]
+target = 0
 
 class Solution:
     def get_pivot(self, nums, n):
@@ -61,8 +61,12 @@ class Solution:
         if nums[0] <= nums[-1]:
             return self.binary_search(nums, target)
         pivot = self.get_pivot(nums, n)
+        print(pivot)
         if target >= nums[0]:
             return self.binary_search(nums[0:pivot], target)
         else:
             ans = self.binary_search(nums[pivot:], target)
             return pivot + ans if ans != -1 else -1
+
+sol = Solution()
+print(sol.search(nums, target))
