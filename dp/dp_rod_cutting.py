@@ -10,6 +10,38 @@
 
 from typing import List
 
+
+def solve(price, arr, rod_length, n):
+    if rod_length == 0:
+        return 0
+    if n == 0:
+        return 0
+    
+    if arr[n-1] > rod_length:
+        return solve(price, arr, rod_length, n-1)
+    else:
+        nocut = solve(price, arr, rod_length, n-1)
+        cut = price[n-1] + solve(price, arr, rod_length - arr[n-1], n)
+        return max(nocut, cut)
+
+
+t = [[-1 for i in range(n+1)] for ii in range(n+1)]
+def solve_memo(price, arr, rod_length, n):
+    if rod_length == 0 or n == 0:
+        return 0
+    
+    if t[rod_length][n] != -1:
+        return t[rod_length][n]
+    
+    if arr[n-1] > rod_length:
+        t[rod_length][n] = solve_memo(price, arr, rod_length, n-1)
+    else:
+        nocut = solve_memo(price, arr, rod_length, n-1)
+        cut = price[n-1] + solve_memo(price, arr, rod_length - arr[n-1], n)
+        t[rod_length][n] = max(nocut, cut)
+    return t[rod_length][n]
+
+
 class Solution:
     def maximumProfit(self, n: int, prices: List[int]) -> int:
         length_array = range(1, n+1)
