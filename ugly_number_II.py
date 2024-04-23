@@ -22,14 +22,23 @@
 # 1 <= n <= 1690
 
 n = 10
-ugly_2s = [1]*n
-ugly_3s = [1]*n
-ugly_5s = [1]*n
+ugly_list = [1]
+ugly_2s_pt = 0
+ugly_3s_pt = 0
+ugly_5s_pt = 0
 for i in range(1, n):
-    ugly_2s[i] = i*2
-    ugly_3s[i] = i*3
-    ugly_5s[i] = i*5
+    ugly2 = ugly_list[ugly_2s_pt] * 2
+    ugly3 = ugly_list[ugly_3s_pt] * 3
+    ugly5 = ugly_list[ugly_5s_pt] * 5
 
-print(ugly_2s)
-print(ugly_3s)
-print(ugly_5s)
+    ugly_list.append(min(ugly2, ugly3, ugly5))
+    if ugly_list[-1] == ugly2:
+        ugly_2s_pt += 1
+    
+    if ugly_list[-1] == ugly3:
+        ugly_3s_pt += 1
+    
+    if ugly_list[-1] == ugly5:
+        ugly_5s_pt += 1
+
+print(ugly_list[n-1])
