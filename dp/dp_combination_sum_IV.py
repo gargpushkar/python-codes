@@ -26,15 +26,69 @@
 
 nums = [1, 2, 3]
 target = 4
+n = len(nums)
+# def get_count(nums, n, target):
+#     if target == 0:
+#         return 1
+#     if n == 0 or target < 0:
+#         return 0
 
-def get_count(nums, n, target):
-    if target == 0:
-        return 1
-    if n == 0:
-        return 0
-    if nums[n-1] > target:
-        return get_count(nums, n-1, target)
-    else:
-        return get_count(nums, n, target-nums[n-1]) + get_count(nums, n-1, target)
+#     take = get_count(nums, n, target-nums[n-1])
+#     notake = get_count(nums, n-1, target)
+#     return notake + take
+#     # if nums[n-1] > target:
+#     #     return get_count(nums, n-1, target)
+#     # else:
+#     #     return get_count(nums, n, target-nums[n-1]) + get_count(nums, n-1, target)
 
-print(get_count(nums, len(nums), target))
+# print(get_count(nums, len(nums), target))
+from typing import List
+class Solution:
+
+    def solve_rec(self,nums,target):
+        
+        if target < 0:
+            return 0
+
+        if target==0:
+            return 1
+        ways = 0
+        for i in nums:
+            ways += self.solve_rec(nums,target-i)
+        
+        return ways 
+
+    def solve_mem(self,nums,target,dp):
+        
+        if target < 0:
+            return 0
+
+        if target==0:
+            return 1
+        
+        
+        if target in dp:
+            return dp[target]
+        ways = 0
+        for i in nums:
+            ways += self.solve_mem(nums,target-i,dp)
+        dp[target] = ways
+        return dp[target]
+        
+    def combinationSum4(self, nums: List[int], target: int) -> int:
+
+        return self.solve_mem(nums,target,{})
+        
+        
+
+
+def get_count(nums, target):
+    t = [1] + [0]*(target)
+
+    for i in range(1, target+1):
+        for num in nums:
+            if i >= num:
+                t[i] += t[i - num]
+    return t[target]
+
+print(get_count(nums, target))
