@@ -32,32 +32,24 @@
 # version 2 < version 1.
 
 class Solution:
-	def compareVersion(self, version1: str, version2: str) -> int:
-		# add your logic here
-		# version_1 = list(map(int, version1.split(".")))
-		version1 = version1.split(".")
-		version_1 = []
-		for i in version1:
-			if i:
-				version_1.append(int(i))
-		# version_2 = list(map(int, version2.split(".")))
-		version2 = version2.split(".")
-		version_2 = []
-		for i in version2:
-			if i:
-				version_2.append(int(i))
-		n1 = len(version_1)
-		n2 = len(version_2)
-		if n1>n2:
-			for i in range(n2, n1):
-				version_2.append(0)
-		else:
-			for i in range(n1, n2):
-				version_1.append(0)
-		for i in range(len(version_1)):
-			if version_1[i] > version_2[i]:
-				return 1
-			elif version_1[i] < version_2[i]:
-				return -1
-		return 0
+    def compareVersion(self, version1: str, version2: str) -> int:
+        version1 = version1.split('.')
+        version2 = version2.split('.')
 
+        ver1 = [int(num) for num in version1 if num]
+        ver2 = [int(num) for num in version2 if num]
+        n1 = len(ver1)
+        n2 = len(ver2)
+        
+        for i in range(n1, n2):
+            ver1.append(0)
+
+        for i in range(n2, n1):
+            ver2.append(0)
+
+        for i in range(len(ver1)):
+            if ver1[i] > ver2[i]:
+                return 1
+            elif ver1[i] < ver2[i]:
+                return -1
+        return 0
